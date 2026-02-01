@@ -1,0 +1,32 @@
+# Microservices Architecture with VirtualBox
+
+This project demonstrates a microservice-based application deployed across two networked Virtual Machines (VMs).
+
+## Architecture
+* **VM 1 -  App-Service (Backend Service):** Hosting a Flask API that manages User Balance data.
+* **VM 2 - Client-Service (Frontend Service):** Hosting a Flask Client that fetches data from VM 1.
+* **Network:** Both VMs communicate via a Private Internal Network (192.168.56.x).
+
+## Configuration
+| VM Name 		| Role 		| IP Address    | Port |
+---------------------------------------------------------------------
+| **App-Service** 	| Backend API   | 192.168.56.101| 5000 |
+| **Client-Service** 	| Frontend Proxy|192.168.56.102 | 5000 |
+
+## How to Test
+1.  **Backend Verification:**
+    bash
+    curl [http://192.168.56.101:5000/balance](http://192.168.56.101:5000/balance)
+    # Output: {"User": "Tarun", "Balance": 5000}
+    
+
+2.  **Frontend-to-Backend Connection:**
+    bash
+    curl [http://192.168.56.102:5000/](http://192.168.56.102:5000/)
+    # Output: Data from Backend: {"User": "Tarun", "Balance": 5000}
+    
+
+## Requirements
+* Python 3.x
+* Flask
+* Requests
